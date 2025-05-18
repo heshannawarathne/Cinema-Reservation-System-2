@@ -1,0 +1,11 @@
+guiSnackbar.manageStock$1
+guiSnackbar.manageStock$2
+guiSnackbar.manageStock$3
+guiSnackbar.manageStock$4
+guiSnackbar.manageStock$5
+guiSnackbar.manageStock$6
+guiSnackbar.manageStock$7
+guiSnackbar.manageStock$8
+guiSnackbar.manageStock$9
+guiSnackbar.manageStock
+guiSnackbar.manageStock$10
