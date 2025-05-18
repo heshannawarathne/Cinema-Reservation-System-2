@@ -489,6 +489,8 @@ public class SnackCashierDashboard extends javax.swing.JFrame {
         jPanel33.add(jPanel35, java.awt.BorderLayout.LINE_END);
 
         jPanel36.setLayout(new java.awt.GridLayout(1, 0));
+
+        jTextField3.setText("Snack ID");
         jPanel36.add(jTextField3);
 
         jPanel33.add(jPanel36, java.awt.BorderLayout.CENTER);
@@ -516,6 +518,8 @@ public class SnackCashierDashboard extends javax.swing.JFrame {
 
         jPanel39.setPreferredSize(new java.awt.Dimension(180, 40));
         jPanel39.setLayout(new java.awt.BorderLayout());
+
+        jTextField5.setText("Snack Name");
         jPanel39.add(jTextField5, java.awt.BorderLayout.CENTER);
 
         jPanel38.add(jPanel39, java.awt.BorderLayout.PAGE_START);
@@ -538,6 +542,8 @@ public class SnackCashierDashboard extends javax.swing.JFrame {
         jPanel40.add(jPanel43, java.awt.BorderLayout.PAGE_START);
 
         jPanel44.setLayout(new java.awt.GridLayout(1, 0));
+
+        jTextField4.setText("Avalible Qty");
         jPanel44.add(jTextField4);
 
         jTextField6.setText("Qty");
@@ -568,6 +574,8 @@ public class SnackCashierDashboard extends javax.swing.JFrame {
         jPanel50.setLayout(new java.awt.BorderLayout());
 
         jPanel51.setLayout(new java.awt.GridLayout(1, 0));
+
+        jTextField7.setText("Price");
         jPanel51.add(jTextField7);
 
         jPanel50.add(jPanel51, java.awt.BorderLayout.CENTER);

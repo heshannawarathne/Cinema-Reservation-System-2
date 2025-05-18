@@ -745,6 +745,9 @@
                                                   </Layout>
                                                   <SubComponents>
                                                     <Component class="javax.swing.JTextField" name="jTextField3">
+                                                      <Properties>
+                                                        <Property name="text" type="java.lang.String" value="Snack ID"/>
+                                                      </Properties>
                                                     </Component>
                                                   </SubComponents>
                                                 </Container>
@@ -808,6 +811,9 @@
                                                       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
                                                       <SubComponents>
                                                         <Component class="javax.swing.JTextField" name="jTextField5">
+                                                          <Properties>
+                                                            <Property name="text" type="java.lang.String" value="Snack Name"/>
+                                                          </Properties>
                                                           <Constraints>
                                                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
                                                               <BorderConstraints direction="Center"/>
@@ -863,6 +869,9 @@
                                                           </Layout>
                                                           <SubComponents>
                                                             <Component class="javax.swing.JTextField" name="jTextField4">
+                                                              <Properties>
+                                                                <Property name="text" type="java.lang.String" value="Avalible Qty"/>
+                                                              </Properties>
                                                             </Component>
                                                             <Component class="javax.swing.JTextField" name="jTextField6">
                                                               <Properties>
@@ -944,6 +953,9 @@
                                                       </Layout>
                                                       <SubComponents>
                                                         <Component class="javax.swing.JTextField" name="jTextField7">
+                                                          <Properties>
+                                                            <Property name="text" type="java.lang.String" value="Price"/>
+                                                          </Properties>
                                                         </Component>
                                                       </SubComponents>
                                                     </Container>
