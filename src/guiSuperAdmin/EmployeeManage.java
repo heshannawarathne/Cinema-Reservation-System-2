@@ -515,23 +515,23 @@ public class EmployeeManage extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        try {
-
-            //            JREmptyDataSource dataSource = new JREmptyDataSource();
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/zgencrms_db", "root", "Geeth@200104");
-
-            JasperPrint report = JasperFillManager.fillReport("src/reports/AllEmployeeNew.jasper",null, connection);
-            JasperViewer.viewReport(report,false);
-
-            //            JasperPrint report = JasperFillManager.fillReport("src/reports/AllEmployee.jasper", null, connection);
-            //            JasperViewer.viewReport(report, false);
-
-            connection.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//
+//            //            JREmptyDataSource dataSource = new JREmptyDataSource();
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/zgencrms_db", "root", "Geeth@200104");
+//
+//            JasperPrint report = JasperFillManager.fillReport("src/reports/AllEmployeeNew.jasper",null, connection);
+//            JasperViewer.viewReport(report,false);
+//
+//            //            JasperPrint report = JasperFillManager.fillReport("src/reports/AllEmployee.jasper", null, connection);
+//            //            JasperViewer.viewReport(report, false);
+//
+//            connection.close();
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
