@@ -22,7 +22,7 @@ public class mySQL {
 
         if (connection == null) {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/zgencrms_db", "root", "Geeth@200104");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/zgencrms_db", "root", "pHRE@9184");
 
         }
 

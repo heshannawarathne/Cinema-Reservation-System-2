@@ -1433,7 +1433,6 @@
                     <Component class="javax.swing.JTextField" name="jTextField7">
                       <Events>
                         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextField7KeyReleased"/>
-                        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextField7KeyTyped"/>
                       </Events>
                     </Component>
                   </SubComponents>

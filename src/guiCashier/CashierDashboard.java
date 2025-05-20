@@ -33,8 +33,6 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 import net.sf.jasperreports.view.JasperViewer;
-import java.lang.reflect.Method;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  *
@@ -60,8 +58,6 @@ public class CashierDashboard extends javax.swing.JFrame {
         generateInvoceId();
         loadPay();
         setLiveDateTime(jLabel8);
-        jTextField5.setEnabled(false);
-        jLabel7.setText("0");
 
     }
 
@@ -973,9 +969,6 @@ public class CashierDashboard extends javax.swing.JFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField7KeyReleased(evt);
             }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField7KeyTyped(evt);
-            }
         });
 
         javax.swing.GroupLayout jPanel67Layout = new javax.swing.GroupLayout(jPanel67);
@@ -1106,7 +1099,6 @@ public class CashierDashboard extends javax.swing.JFrame {
         String EndTime = jTextField10.getText();
         String sheetNo = jTextField5.getText();
         String TicketPrice = jTextField6.getText();
-        String paymentMethod = String.valueOf(jComboBox1.getSelectedItem());
 
         // Validate empty fields
         if (CustomerNum.isEmpty() || Moviename.isEmpty() || HallNo.isEmpty()
@@ -1167,7 +1159,6 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         InvoiceItemMap.put(TicketID, invoiceItem);
 
-        jButton1.setEnabled(false);
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jTextField7KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField7KeyReleased
@@ -1182,58 +1173,40 @@ public class CashierDashboard extends javax.swing.JFrame {
             String dateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
             String paymentMethodID = paymentMethod.get(String.valueOf(jComboBox1.getSelectedItem()));
             String priceT = jLabel7.getText();
-            String painPrice = jTextField7.getText();
             int rowCount = jTable1.getRowCount();
             String user = jLabel2.getText();
-            String giveA = jTextField9.getText();
-            String PayM = String.valueOf(jComboBox1.getSelectedItem());
 
-            if (priceT.equals("0")) {
-                JOptionPane.showMessageDialog(this, "Please Select Movie & Other", "Movie", JOptionPane.WARNING_MESSAGE);
-            } else if (PayM.equals("Select")) {
-                JOptionPane.showMessageDialog(this, "Please Select Payment Type", "Movie", JOptionPane.WARNING_MESSAGE);
-            } else if (painPrice.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Please Enter Payid Amount", "Movie", JOptionPane.WARNING_MESSAGE);
-            } else {
+            // Customer Register or not register
+            ResultSet rs = mySQL.executeSearch("SELECT * FROM `customer` WHERE `mobile` = '" + customerMobile + "'");
+            if (!rs.next()) {
+                // new customer register
+                mySQL.executeIUD("INSERT INTO `customer` (`mobile`, `customer_type_id`) VALUES('" + customerMobile + "', '1')");
+            }
 
-                // Customer Register or not register
-                ResultSet rs = mySQL.executeSearch("SELECT * FROM `customer` WHERE `mobile` = '" + customerMobile + "'");
-                if (!rs.next()) {
-                    // new customer register
-                    mySQL.executeIUD("INSERT INTO `customer` (`mobile`, `customer_type_id`) VALUES('" + customerMobile + "', '1')");
-                }
+            for (InvoiceItem invoiceItem : InvoiceItemMap.values()) {
+                String invoiceID = invoiceItem.getTicketID();
 
-                for (InvoiceItem invoiceItem : InvoiceItemMap.values()) {
-                    String invoiceID = invoiceItem.getTicketID();
+                // Insert to invoice
+                mySQL.executeIUD("INSERT INTO `invoice` VALUES('" + invoiceID + "','" + dateTime + "','" + priceT + "',"
+                        + "'" + rowCount + "','1','" + user + "')");
 
-                    // Insert to invoice
-                    mySQL.executeIUD("INSERT INTO `invoice` VALUES('" + invoiceID + "','" + dateTime + "','" + priceT + "',"
-                            + "'" + rowCount + "','" + paymentMethodID + "','" + user + "')");
+            }
 
-                }
+            // Insert to invoice itam
+            for (InvoiceItem invoiceItem : InvoiceItemMap.values()) {
+                try {
+                    String sheetNumber = invoiceItem.getsheetNo();
 
-                // Insert to invoice itam
-                for (InvoiceItem invoiceItem : InvoiceItemMap.values()) {
-                    try {
-                        String sheetNumber = invoiceItem.getsheetNo();
+                    mySQL.executeIUD("INSERT INTO `movie_invoiceitem` (`sheet_number`, `invoice_id`, `ticket_id`, `customer_mobile`,"
+                            + "`schedule_id`)"
+                            + "VALUES ('" + sheetNumber + "', '" + invoiceItem.getTicketID() + "','" + laky + "',"
+                            + "'" + invoiceItem.getCustomerNum() + "','" + sheduleID + "')");
 
-                        mySQL.executeIUD("INSERT INTO `movie_invoiceitem` (`sheet_number`, `invoice_id`, `ticket_id`, `customer_mobile`,"
-                                + "`schedule_id`)"
-                                + "VALUES ('" + sheetNumber + "', '" + invoiceItem.getTicketID() + "','" + laky + "',"
-                                + "'" + invoiceItem.getCustomerNum() + "','" + sheduleID + "')");
-
-                        reset();
-
-                        JOptionPane.showMessageDialog(
-                                this,
-                                "Successfully Printed Invoice!\nGiven Amount: " + giveA,
-                                "Success",
-                                JOptionPane.INFORMATION_MESSAGE
-                        );
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+//                    for (int i = 0; i < rowCount; i++) {
+//
+//                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -1243,16 +1216,17 @@ public class CashierDashboard extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jTextField7KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField7KeyTyped
-        char c = evt.getKeyChar();
-
-        if (Character.isLetter(c)) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_jTextField7KeyTyped
-
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        reset();
+        int conform
+                = JOptionPane.showConfirmDialog(this, "Are You Sure you want to cancel this Invoice?", "Cancel Invoice", JOptionPane.YES_NO_OPTION);
+
+        if (conform == JOptionPane.YES_OPTION) {
+
+            InvoiceItemMap.clear();
+            loadInvoiceItems();
+            
+
+        }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
@@ -1371,27 +1345,4 @@ public class CashierDashboard extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
-
-    private void reset() {
-        generateInvoceId();
-        jTextField2.setText("");
-        jTextField3.setText("");
-        jTextField4.setText("");
-        jTextField8.setText("");
-        jTextField10.setText("");
-        H1.setEnabled(true);
-        H2.setEnabled(true);
-        H3.setEnabled(true);
-        jTextField5.setText("");
-        jTextField6.setText("");
-        jLabel7.setText("0");
-        jComboBox1.setSelectedIndex(0);
-        jTextField7.setText("");
-        jTextField9.setText("");
-        InvoiceItemMap.clear();
-        jButton1.setEnabled(true);
-
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0);
-    }
 }
